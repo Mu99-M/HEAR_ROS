@@ -3,7 +3,7 @@
 namespace HEAR{
 
 ROSUnit_BoolServer::ROSUnit_BoolServer(ros::NodeHandle &nh) : nh_(nh){
-    ext_trig = new ExternalTrigger<BaseMsg>;
+    // ext_trig = new ExternalTrigger<BaseMsg>;
 }
 
 ExternalTrigger<BaseMsg>* ROSUnit_BoolServer::registerServer(const std::string &service_topic){

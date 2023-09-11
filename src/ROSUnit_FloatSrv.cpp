@@ -3,7 +3,7 @@
 namespace HEAR{
 
 ROSUnit_FloatServer::ROSUnit_FloatServer(ros::NodeHandle &nh) : nh_(nh){
-    ext_trig = new ExternalTrigger<BaseMsg>;
+    // ext_trig = new ExternalTrigger<BaseMsg>;
 }
 
 ExternalTrigger<BaseMsg>* ROSUnit_FloatServer::registerServer(const std::string &service_topic){

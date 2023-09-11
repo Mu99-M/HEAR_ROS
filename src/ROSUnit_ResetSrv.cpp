@@ -3,7 +3,7 @@
 namespace HEAR{
 
 ROSUnit_ResetServer::ROSUnit_ResetServer(ros::NodeHandle &nh) {
-    ext_trig = new ExternalTrigger<BaseMsg>;
+    // ext_trig = new ExternalTrigger<BaseMsg>;
 
 }
 

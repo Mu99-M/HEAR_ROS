@@ -3,9 +3,9 @@
 namespace HEAR{
 
 ExternalTrigger<BaseMsg>* ROSUnit_UpdateTrajectorySrv::registerServer(const std::string &service_topic){
-    ext_trig = new ExternalTrigger<BaseMsg>;
+    // ext_trig = new ExternalTrigger<BaseMsg>;
     this->m_server = this->nh_.advertiseService(service_topic, &ROSUnit_UpdateTrajectorySrv::srv_callback, this);  
-    return ext_trig;
+    return NULL; //return ext_trig;
 }
 
 bool ROSUnit_UpdateTrajectorySrv::srv_callback(hear_msgs::Update_Trajectory::Request& req, hear_msgs::Update_Trajectory::Response& res){
@@ -15,7 +15,6 @@ bool ROSUnit_UpdateTrajectorySrv::srv_callback(hear_msgs::Update_Trajectory::Req
     msg.param.rot = req.trajectory_parameters.rot;
     msg.param.trans = req.trajectory_parameters.trans;
     msg.param.scale = req.trajectory_parameters.scale;
-    msg.param.NumSamples = req.trajectory_parameters.NumSamples;
     msg.param.ClearQ = req.trajectory_parameters.ClearQ;
     
     ext_trig->UpdateCallback((BaseMsg*)&msg);

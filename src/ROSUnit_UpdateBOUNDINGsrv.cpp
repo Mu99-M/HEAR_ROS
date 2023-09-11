@@ -3,9 +3,9 @@
 namespace HEAR{
 
 ExternalTrigger<BaseMsg>* ROSUnit_UpdateBOUNDINGsrv::registerServer(const std::string &service_topic){
-    ext_trig = new ExternalTrigger<BaseMsg>;
+    // ext_trig = new ExternalTrigger<BaseMsg>;
     this->m_server = this->nh_.advertiseService(service_topic, &ROSUnit_UpdateBOUNDINGsrv::srv_callback, this);  
-    return ext_trig;
+    return NULL;//return ext_trig;
 }
 
 bool ROSUnit_UpdateBOUNDINGsrv::srv_callback(hear_msgs::Update_Controller_Bounding::Request& req, hear_msgs::Update_Controller_Bounding::Response& res){

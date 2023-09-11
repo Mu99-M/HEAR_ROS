@@ -13,7 +13,7 @@ private:
 public:
     ROSUnitFloatArrPub(ros::NodeHandle& nh, const std::string& topic_name, int idx){
         pub_ = nh.advertise<std_msgs::Float32MultiArray>(topic_name, 10, true);
-        _input_port = new InputPort<std::vector<float>>(idx, 0);
+        //_input_port = new InputPort<std::vector<float>>(idx, 0);
         id_ = idx;
     }
 
