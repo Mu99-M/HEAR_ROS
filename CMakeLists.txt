@@ -20,11 +20,11 @@ include_directories(
 
 set(${PROJECT_NAME}_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 
-file(GLOB ${PROJECT_NAME}_SRCs ${HEAR_ROS_SOURCE_DIR}/*.cpp)
+file(GLOB ${PROJECT_NAME}_SRCs ${HEAR_ROS_SOURCE_DIR}/Interface_ROS/*.cpp)
 
-# add_library(${PROJECT_NAME} ${HEAR_ROS_SRCs} ${HEAR_SRCs})
+# # add_library(${PROJECT_NAME} ${HEAR_ROS_SRCs} ${HEAR_SRCs})
 
-add_library(${PROJECT_NAME} ${HEAR_ROS_SRCs})
+add_library(${PROJECT_NAME} STATIC ${HEAR_ROS_SRCs})
 
 add_dependencies(${PROJECT_NAME} hear_msgs_generate_messages_cpp)
 
@@ -35,7 +35,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC hear)
 
 set(${PROJECT_NAME}_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/include CACHE INTERNAL "${PROJECT_NAME}: Include Directories" FORCE)
 
-message(HEAR_ROS_SOURCE_DIR="${HEAR_ROS_INCLUDE_DIRS}")
+message(HEAR_ROS_INCLUDE_DIRS="${HEAR_ROS_INCLUDE_DIRS}")
 
 
 set(${PROJECT_NAME}_LIBS ${catkin_LIBRARIES})
