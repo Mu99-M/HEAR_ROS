@@ -82,5 +82,22 @@ SystemConnectorSync<U>* createPublisher(std::string uri){
 };
 
 
+template <>
+class InterfaceFactory<SystemConnector> : public InterfaceFactoryBase{
+
+public:
+InterfaceFactory(){
+    this->setController(new SysConnController());
+}
+template <class U>
+SystemConnectorAsync<U>* createClient(std::string uri){
+    return new SystemConnectorAsync<U>(uri);
+}
+template <class U>
+SystemConnectorAsync<U>* createServer(std::string uri){
+    return new SystemConnectorAsync<U>(uri);
+}
+};
+
 
 }
