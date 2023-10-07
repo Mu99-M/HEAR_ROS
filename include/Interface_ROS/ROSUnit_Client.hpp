@@ -54,6 +54,7 @@ public:
         ROSController* ros_ctrl = (ROSController*)if_ctrl;
         m_client = ros_ctrl->nh.serviceClient<ROS_type>(t_name);
         async_ip=this->createAsyncInputPort<T>(IP::INPUT_ASYNC,"INPUT_ASYNC");
+        this->node_att->block_func=BlockNodeAttributes::Sink;
     }
 
 

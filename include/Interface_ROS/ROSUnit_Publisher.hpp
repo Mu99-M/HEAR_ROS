@@ -52,6 +52,7 @@ public:
         ROSController* ros_ctrl = (ROSController*)if_ctrl;
         pub_ = ros_ctrl->nh.advertise<ROS_type>(topic_name, 10);
         _input_port=this->createInputPort<T>(IP::INPUT,"INPUT");
+        this->node_att->block_func=BlockNodeAttributes::Sink;
     }
     void process() override{
         using ROS_type=typename ROSTopicTypeTranslator<T>::ROSType;

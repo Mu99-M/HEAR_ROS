@@ -57,6 +57,7 @@ public:
         ROSController* ros_ctrl = (ROSController*)if_ctrl;
         sub_ = ros_ctrl->nh.subscribe<ROS_type>(topic, 10, &ROSUnit_Subscriber::callback, this);
         _output_port=this->createOutputPort<T>(OP::OUTPUT,"OUTPUT");
+        this->node_att->block_func=BlockNodeAttributes::Source;
     }
 
     void callback(const typename ROSTopicTypeTranslator<T>::ROSType::ConstPtr& msg){

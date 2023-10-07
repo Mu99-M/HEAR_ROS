@@ -61,6 +61,7 @@ ROSUnit_Server(InterfaceController* if_ctrl, std::string topic){
     ROSController* ros_ctrl = (ROSController*)if_ctrl;
     m_server = ros_ctrl->nh.advertiseService(topic, &ROSUnit_Server::callback, this);
     async_op=this->createAsyncOutputPort<T>(OP::OUTPUT_ASYNC,"OUTPUT_ASYNC");
+    this->node_att->block_func=BlockNodeAttributes::Source;
 }
 
 bool callback(typename ROSServiceTypeTranslator<T>::ROSType::Request& req,typename ROSServiceTypeTranslator<T>::ROSType::Response& res)
