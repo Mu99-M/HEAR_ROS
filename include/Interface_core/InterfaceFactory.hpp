@@ -10,6 +10,8 @@
 #include "Interface_system_connector/SystemConnectorAsync.hpp"
 #include "Interface_system_connector/SystemConnectorSync.hpp"
 
+#include "Interface_motive_natnet/NatNetMotiveController.hpp"
+
 #include <string>
 
 namespace HEAR{
@@ -17,6 +19,7 @@ namespace HEAR{
 class ROS{}; 
 class ROS2{};
 class SystemConnector{};
+class JsonWrapper{};
 
 class InterfaceFactoryBase {
 private:
@@ -83,7 +86,7 @@ SystemConnectorSync<U>* createPublisher(std::string uri){
 
 
 template <>
-class InterfaceFactory<SystemConnector> : public InterfaceFactoryBase{
+class InterfaceFactory<JsonWrapper> : public InterfaceFactoryBase{
 
 public:
 InterfaceFactory(){
