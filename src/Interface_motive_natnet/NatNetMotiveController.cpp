@@ -3,7 +3,9 @@
 namespace HEAR{
 
 
-NatNetMotiveController::NatNetMotiveController(){}
+NatNetMotiveController::NatNetMotiveController(){
+    
+}
 
 
 void NatNetMotiveController::Update() { //Process the data received from the callback and give it to corresponding subscriber

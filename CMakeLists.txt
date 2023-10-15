@@ -20,7 +20,10 @@ include_directories(
 
 set(${PROJECT_NAME}_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 
-file(GLOB ${PROJECT_NAME}_SRCs ${HEAR_ROS_SOURCE_DIR}/Interface_ROS/*.cpp)
+file(GLOB ${PROJECT_NAME}_SRCs 
+${HEAR_ROS_SOURCE_DIR}/Interface_ROS/*.cpp
+${HEAR_ROS_SOURCE_DIR}/Interface_motive_natnet/*.cpp
+)
 
 # # add_library(${PROJECT_NAME} ${HEAR_ROS_SRCs} ${HEAR_SRCs})
 

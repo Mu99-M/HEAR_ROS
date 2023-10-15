@@ -16,8 +16,6 @@ class NatNetMotiveController: public InterfaceController , public CallbackG<char
 private:
 SharedMemory<std::vector<OptiTrackRigidBodyData>> rigid_bodies_shmem;
 std::unordered_map<int,CallbackG<OptiTrackRigidBodyData>*> list_of_subscribers; //the key is the rigid_body id
-
-
 public:
 
 NatNetMotiveController();
