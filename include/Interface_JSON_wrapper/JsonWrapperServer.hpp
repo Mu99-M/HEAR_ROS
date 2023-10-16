@@ -5,15 +5,13 @@
 
 namespace HEAR {
 template <typename T>
-class SystemConnectorAsync : public Block {
-    AsyncInputPort<T>* inp;
+class JsonWrapperServer : public Block {
     AsyncOutputPort<T>* out;
     std::string name;
 public:
-    enum IP{INPUT_ASYNC};
     enum OP{OUTPUT_ASYNC};
 
-    SystemConnectorAsync(std::string _name){
+    JsonWrapperServer(std::string _name){
         this->updateInstanceDescription(_name);
         name=_name;
         inp=createAsyncInputPort<T>(IP::INPUT_ASYNC, "Input");
@@ -32,7 +30,7 @@ public:
     }
 
     std::string getTypeDescription(){
-        return "SystemConnectorAsync";
+        return "JsonWrapperServer";
     }
 
 
