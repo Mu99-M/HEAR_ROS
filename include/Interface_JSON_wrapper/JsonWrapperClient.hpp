@@ -2,7 +2,7 @@
 
 #include "HEAR_core/Block.hpp"
 #include "Interface_JSON_wrapper/JsonWrapperIOController.hpp"
-#include "Interface_JSON_wrapper/castHEARtoString.hpp"
+#include "HEAR_core/HEARTypetoString.hpp"
 #include <string>
 
 namespace HEAR {
@@ -29,7 +29,7 @@ public:
             T data;
             inp->read_AsyncIP(data);
             auto data_json_payload= castHEARToJson(data);
-            std::string data_type_desc=castHEARtoString<T>();
+            std::string data_type_desc=HEARTypetoString<T>();
             // Form the message
             auto data_json=wrapJson();
             io_ctrl->writeJsonToIO(data_json);

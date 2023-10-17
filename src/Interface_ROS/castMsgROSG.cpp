@@ -22,6 +22,11 @@ template <> void castMsgToROS<float,hear_msgs::set_float>(float& data_from,hear_
     data_to.request.data=data_from; 
 }
 
+template <> void castMsgToROS<float,std_msgs::Float32>(float& data_from,std_msgs::Float32& data_to) 
+{ 
+    data_to.data=data_from; 
+}
+
 template <> void castMsgToROS<Vector3D<float>,hear_msgs::set_point>(Vector3D<float>& data_from,hear_msgs::set_point& data_to) 
 { 
     data_to.request.x=data_from.x;
@@ -35,6 +40,7 @@ template <> void castMsgToROS<Vector3D<float>,geometry_msgs::Point>(Vector3D<flo
     data_to.y= data_from.y;
     data_to.z= data_from.z;
 }
+
 template <> void castMsgToROS<std::vector<float>,std_msgs::Float32MultiArray>(std::vector<float>& data_from,std_msgs::Float32MultiArray& data_to) 
 { 
     throw std::logic_error("Function not yet implemented");
