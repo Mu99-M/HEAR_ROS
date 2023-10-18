@@ -10,7 +10,7 @@
 #include "mavlink.h"
 
 namespace HEAR{
-class MAVLinkController: public InterfaceController, public CallbackG<std::tuple<size_t,char*>> {
+class MAVLinkController: public InterfaceController, public CallbackG<std::tuple<size_t,char*>>, public CallerKeyed<int,mavlink_message_t> {
 private:
 IOWriter* io_writer;
 MAVLinkController() {}
@@ -21,9 +21,16 @@ void Update() override {
 }
 
 void callbackPerform(const std::tuple<size_t,char*> data_received) override{
-    //Implement
-    // auto json_data=convertToJson(std::get<0>(data_received),std::get<1>(data_received)); 
 
+    int ret=std::get<0>(data_received);
+    char* buffer=std::get<1>(data_received);
+    mavlink_message_t message;
+    mavlink_status_t status;
+    for (int i = 0; i < ret; ++i) {
+        if (mavlink_parse_char(MAVLINK_COMM_0, buffer[i], &message, &status) == 1) {
+            this->callCallbackByKey(message.msgid,message);
+        }
+    }
 }
 
 void writeMAVLinkMsgToIO(mavlink_message_t& msg){

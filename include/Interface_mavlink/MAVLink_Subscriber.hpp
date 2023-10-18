@@ -1,46 +1,46 @@
 #pragma once
 
-#include <ros/ros.h>
 #include "HEAR_core/DataTypes.hpp"
 #include "HEAR_core/Port.hpp"
-#include "Interface_ROS/castMsgROSG.hpp"
-#include "Interface_ROS/ROSController.hpp"
+#include "HEAR_core/CallbackG.hpp"
+
+#include "Interface_mavlink/MAVLinkController.hpp"
 
 namespace HEAR{
 
 template <typename T>
-class ROSUnit_Subscriber : public Block {
+class MAVLink_Subscriber : public Block, CallbackG<mavlink_message_t> {
 protected:
-    ros::Subscriber sub_;
+    MAVLinkController* if_ctrl;
     OutputPort<T>* _output_port;
+    uint8_t msg_id;
+    T data;
 public:
     enum OP {OUTPUT};
 
-    ROSUnit_Subscriber(InterfaceController* if_ctrl, const std::string& topic){
+    MAVLink_Subscriber(MAVLinkController* if_ctrl_para, const std::string& topic,uint8_t msg_id_para ){
+        if_ctrl=if_ctrl_para;
         this->updateInstanceDescription(topic);
-        using ROS_type=typename ROSTopicTypeTranslator<T>::ROSType;
-        ROSController* ros_ctrl = (ROSController*)if_ctrl;
-        sub_ = ros_ctrl->nh.subscribe<ROS_type>(topic, 10, &ROSUnit_Subscriber::callback, this);
+        msg_id=msg_id_para;
+        if_ctrl->registerKeyedCallback(msg_id_para,this);
         _output_port=this->createOutputPort<T>(OP::OUTPUT,"OUTPUT");
         this->block_att->block_func=BlockNodeAttributes::Source;
     }
 
-    void callback(const typename ROSTopicTypeTranslator<T>::ROSType::ConstPtr& msg){
-        T data;
-        using ROS_type=typename ROSTopicTypeTranslator<T>::ROSType::ConstPtr;
-        ROS_type msg_c=msg; //Non-constant type to be passed to castMsgROS
-        castMsgFromROS<ROS_type,T>(msg_c,data);
-        _output_port->write(data);
+    void callbackPerform(mavlink_message_t msg){
+        castMAVLinkToHEAR(&msg,&data);
     }
 
-    void process() override{}
+    void process() override{
+        _output_port->write(data);
+    }
 
     void processAsync() override{}
 
     void reset() override{}
 
     std::string getTypeDescription(){
-        return "ROSUnit_Subscriber";
+        return "MAVLink_Subscriber";
     }
 
 };

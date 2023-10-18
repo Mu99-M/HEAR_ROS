@@ -8,7 +8,7 @@
 #include "sync_io_drivers/IOWriter.hpp"
 
 namespace HEAR{
-class JsonWrapperIOController: public InterfaceController, public CallbackG<std::tuple<size_t,char*>> {
+class JsonWrapperIOController: public InterfaceController, public CallbackG<std::tuple<size_t,char*>>, public CallerKeyed<std::string,std::string> {
 private:
 IOWriter* io_writer;
 JsonWrapperIOController() {}
