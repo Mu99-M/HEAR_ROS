@@ -20,7 +20,7 @@ include_directories(
     ${mavros_msgs_INCLUDE_DIRS}
     ${catkin_INCLUDE_DIRS}
     ${hear_INCLUDE_DIRS}
-    ${FC_util_INCLUDE_DIRS}    
+    ${HEAR_util_INCLUDE_DIRS}    
 )
 
 set(${PROJECT_NAME}_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)

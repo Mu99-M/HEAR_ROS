@@ -45,7 +45,7 @@ template <> void castJsonToHEAR<BoundingCtrl_parameters>(json& j,BoundingCtrl_pa
     data.h_o1=j["h_o1"].GetFloat();
     data.h_o2=j["h_o2"].GetFloat();
 
-// }
+}
 
 template <> void castJsonToHEAR<MRFT_parameters>(json& j,MRFT_parameters& data) 
 { 
@@ -89,7 +89,7 @@ template <> void castJsonToHEAR<Trajectory_parameters>(json& j,Trajectory_parame
     loadVectorArray<float>(j["rot"].GetArray(), data.rot);
     loadVectorArray<float>(j["trans"].GetArray(), data.trans);
 
-// }
+}
 
 
 template <> void castJsonToHEAR<float>(json& j,float& data,std::string _field_name) 
