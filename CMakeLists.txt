@@ -26,7 +26,7 @@ file(GLOB ${PROJECT_NAME}_SRCs ${HEAR_ROS_SOURCE_DIR}/Interface_ROS/*.cpp)
 
 add_library(${PROJECT_NAME} STATIC ${HEAR_ROS_SRCs})
 
-add_dependencies(${PROJECT_NAME} hear_msgs_generate_messages_cpp)
+add_dependencies(${PROJECT_NAME} hear_msgs_generate_messages_cpp hear)
 
 set_target_properties(${PROJECT_NAME}
                       PROPERTIES POSITION_INDEPENDENT_CODE ON)
