@@ -7,6 +7,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   hear_msgs
   geometry_msgs
+  mavros_msgs
+  mavros_extras
   tf2_geometry_msgs
   tf2
   tf2_ros
@@ -14,13 +16,20 @@ find_package(catkin REQUIRED COMPONENTS
 
 include_directories(
     include
+    ${mavros_extras_INCLUDE_DIRS}
+    ${mavros_msgs_INCLUDE_DIRS}
     ${catkin_INCLUDE_DIRS}
     ${hear_INCLUDE_DIRS}
+    ${HEAR_util_INCLUDE_DIRS}    
 )
 
 set(${PROJECT_NAME}_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 
-file(GLOB ${PROJECT_NAME}_SRCs ${HEAR_ROS_SOURCE_DIR}/Interface_ROS/*.cpp)
+file(GLOB ${PROJECT_NAME}_SRCs 
+${HEAR_ROS_SOURCE_DIR}/Interface_ROS/*.cpp
+${HEAR_ROS_SOURCE_DIR}/Interface_motive_natnet/*.cpp
+${HEAR_ROS_SOURCE_DIR}/Interface_JSON_wrapper/*.cpp
+)
 
 # # add_library(${PROJECT_NAME} ${HEAR_ROS_SRCs} ${HEAR_SRCs})
 
@@ -31,11 +40,11 @@ add_dependencies(${PROJECT_NAME} hear_msgs_generate_messages_cpp hear)
 set_target_properties(${PROJECT_NAME}
                       PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC hear)
+target_link_libraries(${PROJECT_NAME} PUBLIC hear ${mavros_msgs_LIBRARIES})
 
 set(${PROJECT_NAME}_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/include CACHE INTERNAL "${PROJECT_NAME}: Include Directories" FORCE)
 
-message(HEAR_ROS_INCLUDE_DIRS="${HEAR_ROS_INCLUDE_DIRS}")
+message(mavros_extras_INCLUDE_DIRS="${mavros_extras_INCLUDE_DIRS}")
 
 
 set(${PROJECT_NAME}_LIBS ${catkin_LIBRARIES})

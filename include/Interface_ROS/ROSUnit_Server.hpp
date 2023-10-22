@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Interface_ROS/castMsgROSG.hpp"
-#include "Interface_ROS/typeTranslatorROSG.hpp"
+#include "Interface_ROS/typeTranslatorROSfromHEAR.hpp"
 #include "Interface_ROS/ROSController.hpp"
 namespace HEAR{
 

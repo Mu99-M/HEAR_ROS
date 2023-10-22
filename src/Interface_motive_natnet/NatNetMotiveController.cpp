@@ -3,17 +3,15 @@
 namespace HEAR{
 
 
-NatNetMotiveController::NatNetMotiveController(){}
+NatNetMotiveController::NatNetMotiveController(){
+    
+}
 
 
 void NatNetMotiveController::Update() { //Process the data received from the callback and give it to corresponding subscriber
     for (auto it : *rigid_bodies_shmem.getSharedData()){
-        list_of_subscribers[it.id]->callbackPerform(it);
+        this->callCallbackByKey(it.id,it);
     }
-}
-
-void NatNetMotiveController::registerSubscriber(int id,CallbackG<OptiTrackRigidBodyData>* subscriber){
-    list_of_subscribers[id]=subscriber;
 }
 
 void NatNetMotiveController::callbackPerform(char* data){
