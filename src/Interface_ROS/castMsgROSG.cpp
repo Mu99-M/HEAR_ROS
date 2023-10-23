@@ -22,6 +22,11 @@ template <> void castMsgToROS<float,hear_msgs::set_float>(float& data_from,hear_
     data_to.request.data=data_from; 
 }
 
+template <> void castMsgToROS<float,std_msgs::Float32>(float& data_from,std_msgs::Float32& data_to) 
+{ 
+    data_to.data=data_from; 
+}
+
 template <> void castMsgToROS<Vector3D<float>,hear_msgs::set_point>(Vector3D<float>& data_from,hear_msgs::set_point& data_to) 
 { 
     data_to.request.x=data_from.x;
@@ -35,6 +40,7 @@ template <> void castMsgToROS<Vector3D<float>,geometry_msgs::Point>(Vector3D<flo
     data_to.y= data_from.y;
     data_to.z= data_from.z;
 }
+
 template <> void castMsgToROS<std::vector<float>,std_msgs::Float32MultiArray>(std::vector<float>& data_from,std_msgs::Float32MultiArray& data_to) 
 { 
     throw std::logic_error("Function not yet implemented");
@@ -83,6 +89,17 @@ template <> void castMsgToROS<Trajectory_parameters,hear_msgs::Update_Trajectory
     data_to.request.trajectory_parameters.Velocity = data_from.Velocity;
     data_to.request.trajectory_parameters.ClearQ = data_from.ClearQ;
 }
+
+template <> void castMsgToROS<PX4_MAVROS_Vehicle_Att_data,mavros_msgs::VehicleAttitude>(PX4_MAVROS_Vehicle_Att_data& data_from,mavros_msgs::VehicleAttitude& data_to){
+    // data_from.att_quat=tf2::Quaternion(data_to->q_x, data_to->q_y, data_to->q_z, data_to->q_w );
+}
+
+template <> void castMsgToROS<PX4_MAVROS_Vehicle_Ang_Vel_data,mavros_msgs::VehicleAngularVelocity>(PX4_MAVROS_Vehicle_Ang_Vel_data& data_from,mavros_msgs::VehicleAngularVelocity& data_to){
+
+}
+
+
+
 
 template <> void castMsgFromROS<std_srvs::Empty::Request,int>(std_srvs::Empty::Request& data_from,int& data_to) 
 { 
@@ -171,6 +188,14 @@ template <> void castMsgFromROS<hear_msgs::Update_Trajectory,Trajectory_paramete
      data_to.TotalExecutionTime = data_from.request.trajectory_parameters.TotalExecutionTime;
      data_to.Velocity = data_from.request.trajectory_parameters.Velocity;
      data_to.ClearQ =data_from.request.trajectory_parameters.ClearQ;
+}
+
+template <> void castMsgFromROS<mavros_msgs::VehicleAttitude,PX4_MAVROS_Vehicle_Att_data>(mavros_msgs::VehicleAttitude& data_from,PX4_MAVROS_Vehicle_Att_data& data_to){
+    // data_to.att_quat=tf2::Quaternion(data_from->q_x, data_from->q_y, data_from->q_z, data_from->q_w );
+}
+
+template <> void castMsgFromROS<mavros_msgs::VehicleAngularVelocity,PX4_MAVROS_Vehicle_Ang_Vel_data>(mavros_msgs::VehicleAngularVelocity& data_from,PX4_MAVROS_Vehicle_Ang_Vel_data& data_to){
+    
 }
     
 }
