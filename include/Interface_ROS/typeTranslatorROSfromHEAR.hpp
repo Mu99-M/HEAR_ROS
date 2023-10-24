@@ -7,6 +7,7 @@
 #include <std_msgs/Float32.h>
 #include <std_msgs/Int32.h>
 #include <geometry_msgs/Point.h>
+#include <geometry_msgs/QuaternionStamped.h>
 #include <hear_msgs/set_bool.h>
 #include <hear_msgs/set_int.h>
 #include <hear_msgs/set_float.h>
@@ -16,6 +17,7 @@
 #include <hear_msgs/PID_param.h>
 #include <hear_msgs/Update_Controller_PID.h>
 #include <hear_msgs/Update_Trajectory.h>
+#include "tf2/LinearMath/Quaternion.h"
 
 #include "HEAR_core/DataTypes.hpp"
 #include "HEAR_core/Vector3D.hpp"
@@ -110,6 +112,12 @@ template <>
 struct ROSTopicTypeTranslator<std::vector<float>> {
     using ROSType = std_msgs::Float32MultiArray;
 };
+
+template <>
+struct ROSTopicTypeTranslator<tf2::Quaternion> {
+    using ROSType = geometry_msgs::QuaternionStamped;
+};
+
 #ifdef PX4
 template <>
 struct ROSTopicTypeTranslator<PX4_MAVROS_Vehicle_Att_data> {
